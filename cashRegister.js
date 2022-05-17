@@ -108,14 +108,13 @@ function fstatus(change, cid) {
 }
 
 function checkCashRegister(price, cash, cid) {
-  let change = (cash - price).toFixed(2);
+  let change = cash - price;
   let final = fchange(change, convertCid(cid), fstatus(change, cid));
   let total = 0;
   for (let i in final){
     total += final[i][1];
   }
-  total = total.toFixed(2);
-  if (total === change){
+  if (total >= change){
     return {"status": fstatus(change, cid), "change": final};
   }
   else {
